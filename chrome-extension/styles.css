@@ -1,0 +1,20 @@
+body {
+    font-family: sans-serif;
+    padding: 10px;
+    width: 320px;
+  }
+  textarea {
+    width: 100%;
+    height: 60px;
+    margin-top: 10px;
+  }
+  #chatHistory {
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+  button {
+    margin-top: 5px;
+    margin-right: 5px;
+  }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h2>ScreenVision Chatbot</h2>
+  <button id="startCapture">Capture Screen</button>
+  <button id="startLive">Start Live Feed</button>
+  <button id="uploadPdf">Upload PDF</button>
+  <input type="file" id="pdfInput" accept="application/pdf" hidden />
+  <textarea id="chatInput" placeholder="Ask something..."></textarea>
+  <button id="send">Ask</button>
+  <div id="chatHistory"></div>
+  <script src="pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.0.4/dist/tesseract.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
