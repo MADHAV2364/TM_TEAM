@@ -2,6 +2,7 @@ const chatContainer = document.getElementById('chat-container');
 const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 const screenCaptureBtn = document.getElementById('screen-capture');
+const micButton = document.getElementById('mic-button'); // 🎤 button
 
 // Replace with your OpenAI API key
 const apiKey = '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';
@@ -39,6 +40,35 @@ screenCaptureBtn.addEventListener('click', async () => {
   } else {
     appendMessage('bot', '❌ Could not extract any text from the screen.');
   }
+});
+
+// 🎤 Speech Recognition
+micButton.addEventListener('click', () => {
+  if (!('webkitSpeechRecognition' in window)) {
+    appendMessage('bot', '❌ Speech recognition is not supported in this browser.');
+    return;
+  }
+
+  const recognition = new webkitSpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  recognition.onstart = () => {
+    appendMessage('bot', '🎤 Listening...');
+  };
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    appendMessage('user', transcript);
+    askOpenAi(transcript);
+  };
+
+  recognition.onerror = (event) => {
+    appendMessage('bot', `❌ Mic error: ${event.error}`);
+  };
+
+  recognition.start();
 });
 
 // --- Append Chat Message ---
