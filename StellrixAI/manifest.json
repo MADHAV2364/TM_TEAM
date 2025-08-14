@@ -1,0 +1,39 @@
+{
+    "manifest_version": 3,
+    "name": "StellirixAI",
+    "version": "1.0",
+    "description": "A chatbot powered by the OpenAI API that can analyze screen content.",
+    "permissions": [
+      "storage",
+      "activeTab",
+      "desktopCapture"
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+      }
+    },
+    "icons": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "scripts/tesseract.min.js"
+        ],
+        "matches": ["<all_urls>"]
+      }
+    ],
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self';"
+    }
+  }
+  
