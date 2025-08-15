@@ -4,14 +4,14 @@ const sendButton = document.getElementById('send-button');
 const screenCaptureBtn = document.getElementById('screen-capture');
 const micButton = document.getElementById('mic-button'); // 🎤 button
 
-// Replace with your OpenAI API key
+// 🔑 Replace with your own OpenAI API key
 const apiKey = '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';
 const openAiApiUrl = 'https://api.openai.com/v1/chat/completions';
 const model = 'gpt-4o-mini';
 
 let lastScreenText = "";
 
-// --- Event Listeners ---
+// --- Send message ---
 sendButton.addEventListener('click', () => {
   const message = userInput.value.trim();
   if (message) {
@@ -25,24 +25,22 @@ userInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') sendButton.click();
 });
 
+// --- Screen Capture + OCR ---
 screenCaptureBtn.addEventListener('click', async () => {
   appendMessage('bot', '📸 Analyzing your screen...');
   const screenText = await analyzeScreenWithOCR();
 
   if (screenText) {
     lastScreenText = screenText;
-
-    // Clean up the messy OCR text before showing it
     const cleanedText = await cleanOCRText(screenText);
-
-    appendMessage('bot', '✅ Screen analysis complete. Here’s the cleaned text:');
+    appendMessage('bot', '✅ Screen analysis complete:');
     appendMessage('bot', cleanedText);
   } else {
     appendMessage('bot', '❌ Could not extract any text from the screen.');
   }
 });
 
-// 🎤 Speech Recognition
+// --- 🎤 Speech Recognition ---
 micButton.addEventListener('click', () => {
   if (!('webkitSpeechRecognition' in window)) {
     appendMessage('bot', '❌ Speech recognition is not supported in this browser.');
@@ -52,7 +50,6 @@ micButton.addEventListener('click', () => {
   const recognition = new webkitSpeechRecognition();
   recognition.lang = 'en-US';
   recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
 
   recognition.onstart = () => {
     appendMessage('bot', '🎤 Listening...');
@@ -71,7 +68,7 @@ micButton.addEventListener('click', () => {
   recognition.start();
 });
 
-// --- Append Chat Message ---
+// --- Append chat message ---
 function appendMessage(sender, text) {
   const messageDiv = document.createElement('div');
   messageDiv.classList.add('message', `${sender}-message`);
@@ -80,7 +77,7 @@ function appendMessage(sender, text) {
   chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
-// --- Ask OpenAI for general chat ---
+// --- Ask OpenAI ---
 async function askOpenAi(content) {
   try {
     const messages = [];
@@ -88,7 +85,7 @@ async function askOpenAi(content) {
     if (lastScreenText) {
       messages.push({
         role: 'system',
-        content: `The user just analyzed the screen. The extracted text was: "${lastScreenText}".`
+        content: `The user analyzed the screen and got: "${lastScreenText}".`
       });
     }
 
@@ -107,7 +104,6 @@ async function askOpenAi(content) {
     });
 
     const data = await response.json();
-
     if (response.ok && data.choices?.[0]?.message?.content) {
       appendMessage('bot', data.choices[0].message.content.trim());
     } else {
@@ -118,7 +114,7 @@ async function askOpenAi(content) {
   }
 }
 
-// --- Clean OCR Text using OpenAI ---
+// --- Clean OCR text using OpenAI ---
 async function cleanOCRText(rawText) {
   try {
     const response = await fetch(openAiApiUrl, {
@@ -132,7 +128,7 @@ async function cleanOCRText(rawText) {
         messages: [
           {
             role: 'system',
-            content: "You are a text cleaner. Rewrite the given OCR text into clean, readable English. Fix grammar, remove irrelevant symbols, and preserve the original meaning."
+            content: "You are a text cleaner. Rewrite the given OCR text into clean, readable English."
           },
           {
             role: 'user',
@@ -148,13 +144,12 @@ async function cleanOCRText(rawText) {
     } else {
       return rawText; // fallback
     }
-  } catch (error) {
-    console.error("Error cleaning OCR text:", error);
+  } catch {
     return rawText; // fallback
   }
 }
 
-// --- Screen Capture using getDisplayMedia ---
+// --- Capture screen frame ---
 async function captureScreenFrame() {
   const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
   return new Promise((resolve, reject) => {
@@ -165,8 +160,7 @@ async function captureScreenFrame() {
       const canvas = document.createElement('canvas');
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      canvas.getContext('2d').drawImage(video, 0, 0);
       stream.getTracks().forEach(track => track.stop());
       resolve(canvas);
     };
@@ -182,10 +176,12 @@ async function analyzeScreenWithOCR() {
     let text = result.data.text.trim();
     text = text.replace(/<\/?[^>]+(>|$)/g, "");
     text = text.replace(/https?:\/\/[^\s]+/g, "");
-    text = text.replace(/[^\w\s]/g, "");
     return text;
-  } catch (error) {
-    console.error("OCR failed:", error);
+  } catch {
     return null;
   }
 }
+
+/*my first openai api call key= 
+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
+ */
