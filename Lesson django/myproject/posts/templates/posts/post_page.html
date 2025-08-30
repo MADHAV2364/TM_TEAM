@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <section class="post-page-container">
+        <!-- Banner Image -->
+        <img class="banner" src="{{ post.banner.url }}" alt="Banner image for {{ post.name }}'s request">
+
+        <div class="content-section">
+            <!-- Main Heading -->
+            <h1>{{ post.name }}'s Pickup Request</h1>
+            
+            <!-- Meta information -->
+            <p class="post-meta">Submitted on {{ post.date|date:"F j, Y" }}</p>
+
+            <!-- Details in a grid layout -->
+            <div class="details-grid">
+                <div class="details-item">
+                    <h3>Address</h3>
+                    <p>{{ post.address }}</p>
+                    <p>{{ post.city }}</p>
+                    <p>{{ post.zip_code }}</p>
+                </div>
+
+                <div class="details-item">
+                    <h3>Contact Information</h3>
+                    <p><strong>Email:</strong> {{ post.email }}</p>
+                    <p><strong>Phone:</strong> {{ post.phone }}</p>
+                </div>
+            </div>
+
+            <!-- Items to be picked up -->
+            <div class="details-item" style="margin-top: 2rem;">
+                <h3>Items for Recycling</h3>
+                <div class="items-list">
+                    <p>{{ post.items }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

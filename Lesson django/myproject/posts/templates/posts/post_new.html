@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    New post
+{% endblock %}
+
+{% block content %}
+    <section class="form-container">
+        <h1>Post Your Pickup Request</h1>
+        <p>Post your request and contribute to responsile e-waste recycling.</p>
+        <form class="form-with-validation" action="{% url 'posts:new-post' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <button class="form-submit">Add Post</button>
+        </form>
+    </section>
+{% endblock %}

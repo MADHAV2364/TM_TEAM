@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block content %}
+    <!-- Main Content Section -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="main-title">Find an E-Waste Collection Center</h1>
+            <p class="main-subtitle">
+                Below are our certified e-waste collection centers. Click on any card to view detailed information.
+            </p>
+
+            <!-- Centers Grid -->
+            <div id="centers-container" class="centers-grid">
+                <!-- Center cards will be dynamically generated here -->
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Modal for Center Details -->
+    <div id="center-modal" class="modal">
+        <div class="modal-content-wrapper">
+            <button id="close-modal" class="modal-close-btn">&times;</button>
+            <div id="modal-content" class="modal-details">
+                <!-- Center details will be dynamically injected here -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="{% static 'js/centers.js' %}?v=1.0"></script>
+{% endblock %}
