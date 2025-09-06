@@ -563,7 +563,7 @@ nav {
 ======================= */
 .review-section {
   margin: 0 auto;
-  padding: 50px 0px 130px;
+  padding: 250px 0px 130px;
   background-color: #f9f9f9;
 }
 
@@ -1011,4 +1011,211 @@ nav {
   font-weight: 700;
   font-size: 1.25rem;
   color: #ffffff;
+}
+
+
+/*-- Earn Green Rewards */
+
+.rewards-section {
+  width: 100%;
+  height: 975px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  background-color: #6b818c;
+  z-index: 5;
+}
+
+.decor-image {
+  position: absolute;
+}
+
+.decor-left {
+  width: 372px;
+  height: 327px;
+}
+
+.decor-right {
+  top: 390px;
+  left: 1133px;
+  width: 380px;
+  height: 450px;
+}
+
+.rewards-content {
+  position: absolute;
+  top: 120px;
+  left: 120px;
+  width: 1248px;
+  height: 629px;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.rewards-icon {
+  position: absolute;
+  top: 0;
+  left: 448px;
+  width: 352px;
+  height: 629px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.reward-item {
+  position: absolute;
+  font-size: small;
+  width: 313px;
+  padding: 10px 14px;
+  background: #fff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  height: auto;
+}
+
+.rewards-content .reward-item:nth-of-type(1) {
+  top: 80px;
+  left: 80px;
+  text-align: right;
+  align-items: flex-end;
+}
+
+.rewards-content .reward-item:nth-of-type(2) {
+  top: 205px;
+  left: 830px;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.rewards-content .reward-item:nth-of-type(3) {
+  top: 460px;
+  left: 830px;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.rewards-content .reward-item:nth-of-type(4) {
+  top: 340px;
+  left: 80px;
+  text-align: right;
+  align-items: flex-end;
+}
+
+.reward-title {
+  font-family: Poppins, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  line-height: normal;
+}
+
+.reward-text {
+  font-family: Poppins, sans-serif;
+  color: #000;
+  line-height: 1.2;
+}
+
+.rewards-heading {
+  position: absolute;
+  top: 5px;
+  left: 550px;
+  padding-bottom: 30px;
+  font-family: Inter, Poppins, sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.rewards-heading .highlight {
+  color: #000;
+}
+
+
+
+/* CTA */
+.cta {
+  z-index: 10;
+  max-width: 1100px;
+  margin: -130px auto;
+  background: white;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 60px;
+  position: relative;
+  overflow: visible;
+  /* allow image to peek out */
+}
+
+.cta-text {
+  flex: 1;
+  font-weight: 600;
+}
+
+.cta-text h1 {
+  font-size: 2.2rem;
+  margin: 0;
+  font-weight: 900;
+}
+
+.cta-text h1 .green {
+  color: #31c971;
+  font-weight: 900;
+
+}
+
+.cta-text h1 .faded {
+  color: #c7c7f4;
+  font-weight: 900;
+}
+
+.cta-text p {
+  margin-top: 15px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #000;
+  max-width: 420px;
+}
+
+.cta img.phone {
+  position: absolute;
+  right: 300px;
+  top: 55%;
+  transform: translateY(-50%) rotate(30deg);
+  width: 320px;
+  filter: drop-shadow(0px 20px 30px rgba(0, 0, 0, 0.35));
+
+}
+
+.cta-stores {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-left: 40px;
+  z-index: 2;
+}
+
+.cta-stores img {
+  width: 160px;
+  cursor: pointer;
+}
+
+.googleplay {
+  transition: transform 0.2s ease;
+}
+
+.googleplay:hover {
+  transform: scale(1.05);
+}
+
+.appstore {
+  transition: transform 0.2s ease;
+}
+
+.appstore:hover {
+  transform: scale(1.05);
 }
